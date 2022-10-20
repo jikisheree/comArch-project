@@ -4,6 +4,6 @@ lw 1 2 3
 sw 1 2 3
 beq 1 2 -3
 jalr 1 2 3
-halr 1 2 3
+halt
 noop
 start add 1 2 1 

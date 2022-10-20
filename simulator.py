@@ -85,11 +85,12 @@ def beq_op(rs, rt, offset):
 def jalr_op(rs, rt):
     global pc
     if rs == rt:
+        pc += 1
         return
     if rt != 0:
-        reg[rt] = pc+1
+        reg[rt] = pc + 2
     pc = reg[rs]
-
+  
     # print('j -pc-: ', pc)
 
 

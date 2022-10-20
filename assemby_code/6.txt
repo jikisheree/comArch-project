@@ -1,0 +1,10 @@
+    lw 0 1 A        //NOR
+	lw 0 2 B
+	nand 1 1 3
+	nand 2 2 4
+	nand 3 4 3
+	nand 1 2 4
+	nand 3 4 3
+done	halt
+	A .fill 7
+	B .fill 8

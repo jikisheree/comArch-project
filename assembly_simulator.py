@@ -136,7 +136,9 @@ def search_Label(LabelsList,label):
 assembly_path = "assemby_code/"
 assembly_code = os.listdir(assembly_path)
 """Open Assembly Files """
-f = open(os.path.join(assembly_path, assembly_code[2]), 'r')
+# number of 'in file'
+file_num = 4
+f = open(os.path.join(assembly_path, assembly_code[file_num]), 'r')
 
 
 """Add All Assembly To Array"""
@@ -240,7 +242,12 @@ for idx in range(0,len(All_INSTRUCTION)):
 #     print(hstr)
 
 # write machine code to txt file
-with open('machine_code/code3.txt', 'w') as f:
+
+machine_path = "machine_code/"
+machine_code = os.listdir(assembly_path)
+file_num = int('0'+str(file_num))
+
+with open(os.path.join(machine_path, machine_code[file_num]), 'w') as f:
     for i in range(-1, -(len(All_MACHINECODE)+1), -1):
         print(All_MACHINECODE[i])
         f.writelines(str(All_MACHINECODE[i]))

@@ -13,8 +13,8 @@
 	add 4 6 4	  //i += 1
 	beq 0 0 -11
 done	halt
-	mcand .fill 3
-	mler .fill 5
+	mcand .fill 32766
+	mler .fill 10383
 	reg .fill 1
 	sh .fill 32768
 	r .fill 16

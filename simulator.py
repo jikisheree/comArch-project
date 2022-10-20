@@ -1,7 +1,7 @@
 lines = []
 
 # read file of machine code then append each instruction in arr
-with open('code1.txt', 'r') as fp:
+with open('machine_code/4.txt', 'r') as fp:
     read = fp.readlines()
 for i in range(0, len(read)):
     lines.append(read[i].rstrip('\n'))
@@ -115,7 +115,7 @@ def printState():
 
 def print_halted():
     print('machine halted\ntotal of ', ex_num, ' instructions executed')
-    print('final state of machine: ')
+    print('final state of machine: \n')
     printState()
 
 def sign_extend(num: int):

@@ -234,9 +234,14 @@ for idx in range(0,len(All_INSTRUCTION)):
     print(f"Machine_Code: {Machine_Code} ({format(Machine_Code,'#x')})")
     All_MACHINECODE.insert(0,Machine_Code)
 
-
-
 #print(f"opcode: {bin(opcode)} regA: {bin(regA)} regB: {bin(regB)} destReg: {bin(destReg) if destReg is not None else None} offsetField: {bin(offsetField) if offsetField is not None else None}")
 # for N in ALL_MACHINECODE:
 #     hstr = '%0*X' % ((len(N) + 3) // 4, int(N, 2))
 #     print(hstr)
+
+# write machine code to txt file
+with open('machine_code/code3.txt', 'w') as f:
+    for i in range(-1, -(len(All_MACHINECODE)+1), -1):
+        print(All_MACHINECODE[i])
+        f.writelines(str(All_MACHINECODE[i]))
+        f.write('\n')

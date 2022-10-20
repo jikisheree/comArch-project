@@ -1,0 +1,10 @@
+lw 0 1 7
+lw 1 2 -1
+add 1 2 -1
+beq 0 1 2
+beq 0 0 13
+noop
+halt
+five .fill 5
+neg1 .fill -1
+stAddr .fill 2

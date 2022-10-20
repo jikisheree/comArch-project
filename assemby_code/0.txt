@@ -1,0 +1,9 @@
+add 5 2 1
+nand 7 2 3 
+lw 1 2 3
+sw 1 2 3
+beq 1 2 -3
+jalr 1 2 3
+halr 1 2 3
+noop
+start add 1 2 1 

@@ -45,7 +45,7 @@ def get_opcode(name_of_instruction):
         opcode = 0b111
         type = 'O'
     else:
-        raise Exception("Unknown instruction: %s" % name_of_instruction)
+        raise Exception("Unknown instruction: %d" % name_of_instruction)
 
     opcode = opcode 
     return opcode, type
@@ -80,18 +80,26 @@ def get_desReg(field0):
 
 def get_offset(name,field3,idx):
 
+    haveLabel=False
     if isNumber(field3):
         field3=int(field3)
+        
     else:
         for i in range(0, len(All_INSTRUCTION)): #get address of the label
             if All_INSTRUCTION[i][0]== field3:
                 field3 = i
+                haveLabel = True
                 break
+        if(not haveLabel):
+            raise Exception("Unknown Label: %s" %field3)
         if(name == 'beq'):
             field3 = field3 - idx - 1 # because PC + 1 after excution 
     
     if (field3 < 0):
             field3 = field3 % (1<<16)
+    
+    if(field3>(1<<16) or field3 < -((1<<16)+1)):
+            raise Exception("This is not 16 bits integer: %s" % field3)
             
     return field3
 
@@ -117,6 +125,13 @@ def gettwo_compBin(value):
             bintemp+='0'
     return format(bintemp,'016b')
     
+def search_Label(LabelsList,label):
+    for i in range(0, len(LabelsList)):
+        if(LabelsList[i]==label):
+            return True
+    return False
+
+
 """Get All Files From Directory"""
 assembly_path = 'assemby_code/'
 assembly_code = os.listdir(assembly_path)
@@ -130,7 +145,7 @@ All_MACHINECODE = []
 for N in f:
     All_INSTRUCTION.append(N.replace("\n", "").split())
     
-    
+LabelList = []
     
 ZERO = 0
 Resgister ={
@@ -188,7 +203,10 @@ for idx in range(0,len(All_INSTRUCTION)):
             # Current_Instruction[4] is  destReg or offset.
 
             """
-            
+            if(not search_Label(Current_Instruction[0])):
+                LabelList.append(Current_Instruction[0])
+            else:
+                raise Exception("Duplicate Label: %s" %Current_Instruction[0])
             if(Current_Instruction[1] != '.fill'):
                 opcode, type = get_opcode(Current_Instruction[1])
                 if type == 'R':

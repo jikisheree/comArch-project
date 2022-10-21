@@ -136,7 +136,7 @@ assembly_path = "assemby_code/"
 assembly_code = os.listdir(assembly_path)
 """Open Assembly Files """
 # number of 'in file'
-file_num = 7
+file_num = 6
 f = open(os.path.join(assembly_path, assembly_code[file_num]), 'r')
 
 
@@ -204,7 +204,9 @@ for idx in range(0,len(All_INSTRUCTION)):
             # Current_Instruction[4] is  destReg or offset.
 
             """
-            if(not search_Label(LabelList,Current_Instruction[0])):
+            if(not search_Label(LabelList,Current_Instruction[0]) ):
+                if(len(Current_Instruction[0])>6):
+                    raise Exception("Label must have at most 6: %s" %Current_Instruction[0])
                 LabelList.append(Current_Instruction[0])
             else:
                 raise Exception("Duplicate Label: %s" %Current_Instruction[0])

@@ -1,20 +1,12 @@
-	lw 0 2 mcand	//Register@2 = mcand				//Multiply
-	lw 0 3 mler     //Register@3 = mler
-	lw 0 7 r		//#bit
-	beq 4 7 10	    //for i in range 16
-	add 1 1 1       //product+=product
-	lw 0 6 sh       //Register@6 = 1000 0000 0000 0000
-	nand 2 6 5	  
-	nand 5 5 5	    //mcand & 0x800
-	beq 5 0 1	    //if(mcand&0x800)
-	add 1 3 1	    //product += mler
-	add 2 2 2	    //mcand += mcand
-	lw 0 6 reg	    //Register@6 = 1
-	add 4 6 4	    //i += 1
-	beq 0 0 -11
-done	halt	    //end of program
-	mcand .fill 32766  		//mcand = 32766
-	mler .fill 10383		//mler = 10383
-	reg .fill 1				//reg = 1
-	sh .fill 32768			//sh = 0x800
-	r .fill 16				//r = 16
+        lw 0 1 five         //Register@1 = five
+        lw 0 2 eight        //Register@2 = eight
+        lw 0 3 ten          //Register@3 = ten
+        beq 0 1 done           
+        add 1 2 1           //Register@1 = Register@2 + Register@1
+        nand 1 1 1          //Register@1 = Register@1 & Register@1
+        nand 1 3 1          //Register@1 = Register@1 & Register@3
+noop
+done    halt                //end of program
+five .fill 5                //five = 5
+eight .fill 8               //eight = 8    
+ten .fill 10                //ten = 10

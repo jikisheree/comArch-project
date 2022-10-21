@@ -1,10 +1,43 @@
-    lw 0 1 A        //Register@1 = 7    		//Half Adder
-	lw 0 2 B		//Register@2 = 5
-	nand 1 2 3		//Register@3 = Register@1(7) & Register@2(5) 
-	nand 1 3 4		//Register@4 = Register@1(7) & Register@3
-	nand 2 3 5		//Register@5 = Register@2(5) & Register@3
-	nand 4 5 4		//Register@4 = Register@5 & Register@4
-	nand 3 3 3		//Register@3 = Register@3 & Register@3
-done	halt		//end of program
-	A .fill 7		// A = 7
-	B .fill 5		// B = 5
+	lw 	0 	1 	n 
+	lw 	0 	2 	r
+	lw	0	6	combiAdr
+	jalr	6	7
+	halt
+combi	lw	0	6	pos1
+	sw	5	7	stack		//save return address on stack
+	add	5	6	5		    //increment stack pointer
+	sw	5	1	stack		//save n on stack
+	add	5	6	5		    //increment stack pointer
+	sw	5	2	stack		//save r on stack
+	add	5	6	5		    //increment stack pointer
+	sw	5	4	stack		//save $4 on stack	
+	add	5	6	5		    //increment stack pointer	
+	beq	2	0	return		//r == 0	return 1
+	beq	1	2	return		//n == r	return 1
+	lw	0	6	neg1
+	add	1	6	1		    //n -= 1
+	lw	0	4	combiAdr
+	jalr	4	7			//combi(n-1,r)
+	lw	0	6	neg1		
+	add	2	6	2		    //r -= 1
+	jalr	4	7			//combi(n-1,r-1)
+	beq	0	0	setup		
+return	lw	0	6	pos1		
+	add	3 	6	3		    //$3 += 1
+	beq	0	0	setup		
+setup	lw	0	6	neg1		
+	add	5	6	5		    //decrement stack pointer
+	lw	5	4	stack		//recover $4
+	add	5	6	5		    //decrement stack pointer
+	lw	5	2	stack		//recover r 
+	add	5	6	5		    //decrement stack pointer
+	lw	5	1	stack		//recover n
+	add	5	6	5		    //decrement stack pointer
+	lw	5	7	stack		//loopreturn
+	jalr	7	6			//exit		
+	n 		    .fill 	7
+	r 		    .fill 	3
+	combiAdr 	.fill 	combi
+	pos1 		.fill 	1
+	neg1 		.fill 	-1
+	stack 		.fill 	0

@@ -3,7 +3,7 @@
 lines = []
 
 # open file then read file
-file_path = 'code.txt'
+file_path = 'machine_code/7.txt'
 with open(file_path, 'r') as fp:
     read = fp.readlines()
 # append each line (instruction) into array
@@ -114,7 +114,7 @@ def jalr_op(rs, rt):
         return
     # if rt is not 0 (if it is 0 we won't overwrite it)
     if rt != 0:
-        # store value of 'current pc + 2' to register rt
+        # store value of 'current pc + 1' to register rt
         reg[rt] = pc + 1
     # pc jump to address that stored in rs
     pc = reg[rs]

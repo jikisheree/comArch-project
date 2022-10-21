@@ -1,12 +1,12 @@
-        lw 0 1 five         //Register@1 = 5
-        lw 0 2 eight        //Register@2 = 8
-        lw 0 3 ten          //Register@3 = 10
+        lw 0 1 five         //Register@1 = five
+        lw 0 2 eight        //Register@2 = eight
+        lw 0 3 ten          //Register@3 = ten
         beq 0 1 1           
         add 1 2 1           //Register@1 = Register@2 + Register@1
         nand 1 1 1          //Register@1 = Register@1 & Register@1
         nand 1 3 1          //Register@1 = Register@1 & Register@3
 noop
-done    halt        //end of program
-five .fill 5
-eight .fill 8
-ten .fill 10
+done    halt                //end of program
+five .fill 5                //five = 5
+eight .fill 8               //eight = 8    
+ten .fill 10                //ten = 10

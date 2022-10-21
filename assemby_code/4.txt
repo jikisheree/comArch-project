@@ -1,20 +1,18 @@
-        lw 0 1 five         //Register@1 = five
+		lw 0 1 five         //Register@1 = five
         lw 0 2 eight        //Register@2 = eight
         lw 0 3 ten          //Register@3 = ten
         lw 0 4 r            //Register@4 = r    
-        lw 0 6 temp         //Register@6 = temp   
-        lw 0 7 jump         //Register@7 = jump   
-        beq 0 4 6           //if(r == 0) jump to done
+        lw 0 6 temp         //Register@6 = temp     
+        beq 0 4 done           //if(r == 0) jump to done
         add 1 2 1           //Register@1 = Register@2 + Register@1
-        add 4 -1 4          //r = r - 1    
+        add 4 6 4          //r = r - 1    
         nand 1 1 1          //Register@1 = Register@1 & Register@1
         nand 1 3 1          //Register@1 = Register@1 & Register@3
-        beq 0 0 7           //jump to check round    
+        beq 0 0 -6           //jump to check round    
 noop
 done    halt                //end of program
 five .fill 5                //five = 5
 eight .fill 8               //eight = 8    
 ten .fill 10                //ten = 10
-r .fill 4                   //r = 4
-temp .fill -1               //temp = -1
-jump .fill -6               //jump = -6     
+r .fill 2                   //r = 2
+temp .fill -1               //temp = -1	

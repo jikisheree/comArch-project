@@ -1,7 +1,6 @@
 from operator import xor
 import os
 from pickletools import opcodes
-
 from numpy import int32
 
 
@@ -9,7 +8,7 @@ def isNumber(value):
     """ Checks if value is a string or number"""
     try:
         float(value)   # Type-casting the string to `float`.
-                   # If string is not a valid `float`, 
+                    # If string is not a valid `float`, 
                    # it'll raise `ValueError` exception
     except ValueError:
         return False

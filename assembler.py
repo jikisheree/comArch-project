@@ -136,7 +136,7 @@ assembly_path = "assemby_code/"
 assembly_code = os.listdir(assembly_path)
 """Open Assembly Files """
 # number of 'in file'
-file_num = 6
+file_num = 5
 f = open(os.path.join(assembly_path, assembly_code[file_num]), 'r')
 
 

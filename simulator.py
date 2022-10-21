@@ -3,7 +3,7 @@
 lines = []
 
 # open file then read file
-file_path = 'machine_code/7.txt'
+file_path = 'machine_code/5.txt'
 with open(file_path, 'r') as fp:
     read = fp.readlines()
 # append each line (instruction) into array

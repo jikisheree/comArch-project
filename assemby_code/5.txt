@@ -1,0 +1,10 @@
+    lw 0 1 A            //Half Adder
+	lw 0 2 B
+	nand 1 2 3
+	nand 1 3 4
+	nand 2 3 5
+	nand 4 5 4
+	nand 3 3 3
+done	halt
+	A .fill 7
+	B .fill 5

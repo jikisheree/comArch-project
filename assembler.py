@@ -169,9 +169,9 @@ for idx in range(0,len(All_INSTRUCTION)):
         
         """
         # Current_Instruction[0] is name of instruction , 
-        # Current_Instruction[1] is name of regDest ,
-        # Current_Instruction[2] is name of regA ,
-        # Current_Instruction[3] is  regB or offset.
+        # Current_Instruction[1] is name of regA ,
+        # Current_Instruction[2] is name of regB ,
+        # Current_Instruction[3] is  regDest or offset.
 
         """
         if(Current_Instruction[0] != '.fill'):

@@ -7,9 +7,7 @@ from numpy import int32
 def isNumber(value):
     """ Checks if value is a string or number"""
     try:
-        float(value)   # Type-casting the string to `float`.
-                    # If string is not a valid `float`, 
-                   # it'll raise `ValueError` exception
+        float(value)   
     except ValueError:
         return False
     return True
@@ -44,7 +42,7 @@ def get_opcode(name_of_instruction):
         opcode = 0b111
         type = 'O'
     else:
-        raise Exception("Unknown instruction: " , name_of_instruction)
+        raise Exception("Unknown instruction: " , name_of_instruction , "exit(0)")
 
     opcode = opcode 
     return opcode, type
@@ -90,7 +88,7 @@ def get_offset(name,field3,idx):
                 haveLabel = True
                 break
         if(not haveLabel):
-            raise Exception("Unknown Label: %s" %field3)
+            raise Exception("Unknown Label: %s" %field3 , " exit(0)")
         if(name == 'beq'):
             field3 = field3 - idx - 1 # because PC + 1 after excution 
     
@@ -98,7 +96,7 @@ def get_offset(name,field3,idx):
             field3 = field3 % (1<<16)
     
     if(field3>(1<<16) or field3 < -((1<<16)+1)):
-            raise Exception("This is not 16 bits integer: %s" % field3)
+            raise Exception("This is not 16 bits integer: %s" % field3, " exit(0)")
             
     return field3
 
@@ -206,10 +204,10 @@ for idx in range(0,len(All_INSTRUCTION)):
             """
             if(not search_Label(LabelList,Current_Instruction[0]) ):
                 if(len(Current_Instruction[0])>6):
-                    raise Exception("Label must have at most 6: %s" %Current_Instruction[0])
+                    raise Exception("Label must have at most 6: %s" %Current_Instruction[0], " exit(0)")
                 LabelList.append(Current_Instruction[0])
             else:
-                raise Exception("Duplicate Label: %s" %Current_Instruction[0])
+                raise Exception("Duplicate Label: %s" %Current_Instruction[0], " exit(0)")
             if(Current_Instruction[1] != '.fill'):
                 opcode, type = get_opcode(Current_Instruction[1])
                 if type == 'R':
@@ -234,8 +232,9 @@ for idx in range(0,len(All_INSTRUCTION)):
                     value = gettwo_compVal(value)
                 Machine_Code = value
                     
-    print(f"Machine_Code: {Machine_Code} ({format(Machine_Code,'#x')})")
+    print(f"(address {idx}): {Machine_Code})")
     All_MACHINECODE.insert(0,Machine_Code)
+
 
 #print(f"opcode: {bin(opcode)} regA: {bin(regA)} regB: {bin(regB)} destReg: {bin(destReg) if destReg is not None else None} offsetField: {bin(offsetField) if offsetField is not None else None}")
 # for N in ALL_MACHINECODE:
@@ -253,3 +252,4 @@ with open(os.path.join(machine_path, machine_code[file_num]), 'w') as f:
         print(All_MACHINECODE[i])
         f.writelines(str(All_MACHINECODE[i]))
         f.write('\n')
+print('exit(1)')

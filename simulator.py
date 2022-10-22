@@ -134,8 +134,8 @@ def sign_extend(num: int):
     return num
 
 
-# convert 16 bits to 32 bits
-def convert_32bit(n):
+# overflow
+def check_overflow(n):
     # print('n',bin(n))
     if n > 0xFFFFFFFF:
         raise OverflowError
@@ -208,7 +208,7 @@ while ifRunning:
         rt = (inst >> 16) & 0b0111                                          # bit 18-16
         offset = sign_extend(inst & 0b1111111111111111)                     # bit 15-0
         # convert to 32 bits
-        offset = convert_32bit(offset)
+        offset = check_overflow(offset)
 
         # lw or sw
         # if 2 MSB of opcode is equal to 1 (or 0b01) -> lw operation
